@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISO 9001:2026 - Was ändert sich? | QM-Guru Akademie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2B6CB0;
+            --primary-dark: #2C5282;
+            --primary-light: #90CDF4;
+            --primary-bg: #EBF8FF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2D3748;
+            background: #F7FAFC;
+        }
+        
+        .category-badge {
+            background: var(--primary-bg);
+            color: var(--primary-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .progress-bar {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .progress-track {
+            height: 8px;
+            background: #E2E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .module {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .module.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .highlight-box {
+            background: var(--primary-bg);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+        
+        .highlight-box.warning {
+            background: #FFFAF0;
+            border-left-color: #DD6B20;
+        }
+        
+        .highlight-box.success {
+            background: #F0FFF4;
+            border-left-color: #38A169;
+        }
+        
+        .highlight-box.new {
+            background: #FAF5FF;
+            border-left-color: #805AD5;
+        }
+        
+        .icon-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .icon-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .icon-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .toc {
+            display: grid;
+            gap: 0.75rem;
+        }
+        
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: #F7FAFC;
+            border-radius: 8px;
+        }
+        
+        .toc-number {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        
+        .quiz-question {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-question h3 {
+            margin-bottom: 1rem;
+            color: #2D3748;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 0.75rem;
+        }
+        
+        .quiz-option {
+            padding: 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--primary-light);
+            background: var(--primary-bg);
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-bg);
+        }
+        
+        .quiz-option.correct {
+            border-color: #38A169;
+            background: #F0FFF4;
+        }
+        
+        .quiz-option.incorrect {
+            border-color: #E53E3E;
+            background: #FFF5F5;
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .result-score {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .result-passed {
+            color: #38A169;
+        }
+        
+        .result-failed {
+            color: #E53E3E;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #E2E8F0;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background: #E2E8F0;
+            color: #4A5568;
+        }
+        
+        .btn-secondary:hover {
+            background: #CBD5E0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2D3748;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #F7FAFC;
+        }
+        
+        .new-badge {
+            background: #805AD5;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 1.3rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-left: -4.5px;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .checklist-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--primary-bg);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background: white; border-bottom: 1px solid #E2E8F0; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <a href="https://qm-guru.de" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+            <div style="width: 45px; height: 45px; background: #2B6CB0; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: white; font-weight: 700; font-size: 1.1rem;">QM</span>
+            </div>
+            <div>
+                <div style="font-weight: 600; color: #2D3748;">QM-Guru</div>
+                <div style="font-size: 0.85rem; color: #718096;">Online Akademie</div>
+            </div>
+        </a>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <a href="https://qm-guru-akademie.netlify.app" style="color: #4A5568; text-decoration: none; font-size: 0.95rem;">← Zur Akademie</a>
+            <a href="https://onlinecert.info" target="_blank" style="background: #DD6B20; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 0.9rem;">🏆 onlinecert.info</a>
+        </div>
+    </header>
+
+    <div class="progress-bar">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span class="category-badge">🔍 Qualitätsmanagement</span>
+            <span id="progressText">Modul 1 von 10</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <main class="container" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+        
+        <!-- Modul 0: Registrierung -->
+        <div class="module active" id="module0">
+            <h1>🔍 ISO 9001:2026 – Was ändert sich?</h1>
+            <p style="font-size: 1.1rem; color: #718096; margin-top: 0.5rem;">Online-Unterweisung zu den Neuerungen der kommenden Revision</p>
+            
+            <div class="highlight-box warning">
+                <h3>⚠️ Hinweis zum Entwurfsstatus</h3>
+                <p>Diese Schulung basiert auf dem <strong>ISO/DIS 9001</strong> (Draft International Standard). Die finale ISO 9001:2026 wird voraussichtlich im <strong>September 2026</strong> veröffentlicht. Bis dahin können Details noch angepasst werden.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>📋 Schulungsinhalt</h3>
+                <div class="toc">
+                    <div class="toc-item"><span class="toc-number">1</span> Warum eine Revision?</div>
+                    <div class="toc-item"><span class="toc-number">2</span> Harmonized Structure (HS)</div>
+                    <div class="toc-item"><span class="toc-number">3</span> Klimawandel als Anforderung <span class="new-badge">NEU</span></div>
+                    <div class="toc-item"><span class="toc-number">4</span> Risiken und Chancen getrennt</div>
+                    <div class="toc-item"><span class="toc-number">5</span> Qualitätskultur & Ethik <span class="new-badge">NEU</span></div>
+                    <div class="toc-item"><span class="toc-number">6</span> Qualitätspolitik & Strategie</div>
+                    <div class="toc-item"><span class="toc-number">7</span> Änderungsplanung (6.3)</div>
+                    <div class="toc-item"><span class="toc-number">8</span> Anhänge & Redaktion</div>
+                    <div class="toc-item"><span class="toc-number">9</span> Zeitleiste & Übergang</div>
+                    <div class="toc-item"><span class="toc-number">10</span> Praktische Umsetzung</div>
+                </div>
+            </div>
+            
+            <div style="background: #F0FFF4; padding: 1rem; border-radius: 8px; margin: 1.5rem 0;">
+                <p><strong>⏱️ Dauer:</strong> ca. 25-35 Minuten</p>
+                <p><strong>📝 Abschluss:</strong> 10 Fragen, Bestehen ab 70% (7 richtig)</p>
+                <p><strong>🎓 Zertifikat:</strong> Bei erfolgreichem Abschluss per E-Mail</p>
+            </div>
+            
+            <h3>Ihre Daten für das Zertifikat</h3>
+            <div class="form-group">
+                <label for="vorname">Vorname *</label>
+                <input type="text" id="vorname" required>
+            </div>
+            <div class="form-group">
+                <label for="nachname">Nachname *</label>
+                <input type="text" id="nachname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail-Adresse *</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="firma">Firma (optional)</label>
+                <input type="text" id="firma">
+            </div>
+            
+            <button class="btn btn-primary" onclick="startCourse()" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+                🚀 Schulung starten
+            </button>
+        </div>
+
+        <!-- Modul 1: Warum eine Revision? -->
+        <div class="module" id="module1">
+            <h2>1. Warum eine Revision?</h2>
+            
+            <div class="highlight-box">
+                <h3>📅 Die ISO 9001 wird regelmäßig überarbeitet</h3>
+                <p>ISO-Normen werden alle 5-7 Jahre überprüft und bei Bedarf aktualisiert. Die letzte große Revision war <strong>2015</strong> – nach über 10 Jahren ist nun eine Aktualisierung fällig.</p>
+            </div>
+            
+            <h3>Gründe für die Revision 2026:</h3>
+            
+            <ul class="icon-list">
+                <li><strong>Harmonisierung:</strong> Anpassung an die neue "Harmonized Structure" (HS) für bessere Integration mit anderen Managementsystemen</li>
+                <li><strong>Klimawandel:</strong> Integration des 2024er Amendments zu Klimaaspekten</li>
+                <li><strong>Praxiserfahrung:</strong> Erkenntnisse aus 10+ Jahren Anwendung der ISO 9001:2015</li>
+                <li><strong>Klarheit:</strong> Verständlichere Formulierungen und bessere Erläuterungen</li>
+                <li><strong>Aktualität:</strong> Berücksichtigung aktueller Themen wie Ethik und Qualitätskultur</li>
+            </ul>
+            
+            <div class="highlight-box success">
+                <h4>💡 Gute Nachricht</h4>
+                <p>Die Revision ist <strong>keine Revolution</strong> – es gibt keinen "Big Bang" wie 2015. Wer die ISO 9001:2015 gut umgesetzt hat, wird die Umstellung problemlos schaffen!</p>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 2: Harmonized Structure -->
+        <div class="module" id="module2">
+            <h2>2. Harmonized Structure (HS)</h2>
+            
+            <div class="highlight-box">
+                <h3>🔄 Von HLS zu HS</h3>
+                <p>Die bisherige <strong>High Level Structure (HLS)</strong> wird durch die weiterentwickelte <strong>Harmonized Structure (HS)</strong> aus den ISO-Direktiven ersetzt.</p>
+            </div>
+            
+            <h3>Was bedeutet das?</h3>
+            
+            <ul class="icon-list">
+                <li>Die <strong>10-Kapitel-Struktur</strong> bleibt erhalten</li>
+                <li>Abschnitt 3 wird um zusätzliche <strong>Begriffe/Definitionen</strong> aus der HS ergänzt</li>
+                <li>Der Bezug zu <strong>ISO 9000</strong> (Begriffe) bleibt bestehen</li>
+                <li>Bessere <strong>Integration</strong> mit ISO 14001, ISO 45001 etc.</li>
+            </ul>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Kapitel</th>
+                    <th>Inhalt</th>
+                    <th>Änderung</th>
+                </tr>
+                <tr>
+                    <td>1-3</td>
+                    <td>Anwendungsbereich, Verweis, Begriffe</td>
+                    <td>Begriffe ergänzt</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Kontext der Organisation</td>
+                    <td>Klima ergänzt</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Führung</td>
+                    <td>Kultur & Ethik</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Planung</td>
+                    <td>6.1 & 6.3 erweitert</td>
+                </tr>
+                <tr>
+                    <td>7-10</td>
+                    <td>Unterstützung bis Verbesserung</td>
+                    <td>Anmerkungen aktualisiert</td>
+                </tr>
+            </table>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 3: Klimawandel -->
+        <div class="module" id="module3">
+            <h2>3. Klimawandel als Anforderung <span class="new-badge">NEU</span></h2>
+            
+            <div class="highlight-box new">
+                <h3>🌍 Amendment 2024 wird integriert</h3>
+                <p>Was 2024 als separates Amendment (ISO 9001/Amd 1:2024) veröffentlicht wurde, ist im Entwurf nun <strong>direkt im Normtext</strong> enthalten.</p>
+            </div>
+            
+            <h3>Wo erscheint Klimawandel in der Norm?</h3>
+            
+            <div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
+                <div style="background: white; padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--primary);">
+                    <h4 style="margin: 0 0 0.5rem 0;">📍 Abschnitt 4.1 – Kontext der Organisation</h4>
+                    <p style="margin: 0;">Die Organisation muss bestimmen, ob <strong>Klimawandel ein relevantes Thema</strong> ist.</p>
+                </div>
+                
+                <div style="background: white; padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--primary);">
+                    <h4 style="margin: 0 0 0.5rem 0;">📍 Abschnitt 4.2 – Interessierte Parteien</h4>
+                    <p style="margin: 0;">Prüfen, ob interessierte Parteien <strong>klimabezogene Anforderungen</strong> haben.</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box warning">
+                <h4>⚠️ Was heißt das praktisch?</h4>
+                <p>Sie müssen nicht zwingend "grün" werden – aber Sie müssen <strong>dokumentiert bewerten</strong>, ob und wie Klimawandel für Ihre Organisation relevant ist:</p>
+                <ul>
+                    <li>Auswirkungen auf Ihre Prozesse/Produkte?</li>
+                    <li>Anforderungen von Kunden/Gesetzgeber?</li>
+                    <li>Risiken durch Klimaveränderungen?</li>
+                </ul>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 4: Risiken und Chancen -->
+        <div class="module" id="module4">
+            <h2>4. Risiken und Chancen – Klarer getrennt</h2>
+            
+            <div class="highlight-box">
+                <h3>⚖️ Abschnitt 6.1 wird aufgeteilt</h3>
+                <p>Der risikobasierte Ansatz bleibt – aber Risiken und Chancen werden nun in <strong>getrennten Unterabschnitten</strong> behandelt.</p>
+            </div>
+            
+            <h3>Neue Struktur von 6.1:</h3>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>ISO 9001:2015</th>
+                    <th>ISO 9001:2026 (DIS)</th>
+                </tr>
+                <tr>
+                    <td>6.1.1 Allgemeines</td>
+                    <td>6.1.1 Allgemeines</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">6.1.2 Maßnahmen planen</td>
+                    <td><strong>6.1.2 Maßnahmen zum Umgang mit Risiken</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>6.1.3 Maßnahmen zum Umgang mit Chancen</strong></td>
+                </tr>
+            </table>
+            
+            <div class="highlight-box success">
+                <h4>💡 Warum diese Änderung?</h4>
+                <p>In der Praxis wurden <strong>Chancen oft vernachlässigt</strong> – der Fokus lag zu stark auf Risiken. Durch die Trennung sollen Chancen systematischer behandelt und sichtbarer werden.</p>
+            </div>
+            
+            <h3>Beispiele für Chancen:</h3>
+            <ul class="icon-list">
+                <li>Neue Märkte erschließen</li>
+                <li>Prozesse digitalisieren/automatisieren</li>
+                <li>Kompetenzen aufbauen</li>
+                <li>Kundenzufriedenheit steigern</li>
+                <li>Innovationen vorantreiben</li>
+            </ul>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 5: Qualitätskultur & Ethik -->
+        <div class="module" id="module5">
+            <h2>5. Qualitätskultur & Ethisches Verhalten <span class="new-badge">NEU</span></h2>
+            
+            <div class="highlight-box new">
+                <h3>🎯 Explizite Anforderung an Führung</h3>
+                <p>Neu im Abschnitt <strong>5.1.1 Führung und Verpflichtung</strong>: Die oberste Leitung soll Qualitätskultur und ethisches Verhalten <strong>aktiv fördern</strong>.</p>
+            </div>
+            
+            <h3>Was ist neu?</h3>
+            
+            <div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
+                <div style="background: white; padding: 1.25rem; border-radius: 8px; border-left: 4px solid #805AD5;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #553C9A;">📍 Abschnitt 5.1.1 – Führung</h4>
+                    <p style="margin: 0;">Führung soll <strong>Qualitätskultur und ethisches Verhalten</strong> fördern.</p>
+                </div>
+                
+                <div style="background: white; padding: 1.25rem; border-radius: 8px; border-left: 4px solid #805AD5;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #553C9A;">📍 Abschnitt 7.3 – Bewusstsein</h4>
+                    <p style="margin: 0;">Mitarbeitende sollen sich der <strong>Qualitätskultur und Ethik bewusst</strong> sein.</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🤔 Was bedeutet "Qualitätskultur"?</h4>
+                <ul class="icon-list">
+                    <li>Gemeinsame Werte und Überzeugungen zu Qualität</li>
+                    <li>Qualität als Selbstverständlichkeit, nicht als Pflicht</li>
+                    <li>Offener Umgang mit Fehlern (Lernkultur)</li>
+                    <li>Kontinuierliche Verbesserung als Haltung</li>
+                </ul>
+            </div>
+            
+            <div class="highlight-box warning">
+                <h4>⚠️ Praxis-Tipp</h4>
+                <p>Kultur lässt sich nicht "verordnen" – aber sie muss <strong>gelebt und nachweisbar</strong> sein:</p>
+                <ul>
+                    <li>Führungsroutinen (Vorleben)</li>
+                    <li>Kommunikation (Qualität als Thema)</li>
+                    <li>Schulung/Onboarding</li>
+                    <li>Ziele und Anreize</li>
+                </ul>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 6: Qualitätspolitik & Strategie -->
+        <div class="module" id="module6">
+            <h2>6. Qualitätspolitik & Strategie</h2>
+            
+            <div class="highlight-box">
+                <h3>📋 Abschnitt 5.2.1 wird präzisiert</h3>
+                <p>Die Anforderungen an die Qualitätspolitik werden erweitert: Sie soll den <strong>Kontext der Organisation</strong> berücksichtigen und die <strong>strategische Ausrichtung</strong> expliziter unterstützen.</p>
+            </div>
+            
+            <h3>Was ändert sich bei der Qualitätspolitik?</h3>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>ISO 9001:2015</th>
+                    <th>ISO 9001:2026 (DIS)</th>
+                </tr>
+                <tr>
+                    <td>Für Zweck und Kontext angemessen</td>
+                    <td>Für Zweck und Kontext angemessen <strong>+ Kontext explizit berücksichtigen</strong></td>
+                </tr>
+                <tr>
+                    <td>Strategische Ausrichtung unterstützen</td>
+                    <td>Strategische Ausrichtung <strong>expliziter</strong> unterstützen</td>
+                </tr>
+            </table>
+            
+            <div class="highlight-box success">
+                <h4>💡 Praktische Umsetzung</h4>
+                <p>Prüfen Sie Ihre Qualitätspolitik:</p>
+                <ul class="icon-list">
+                    <li>Passt sie zu Ihrem aktuellen Kontext (4.1)?</li>
+                    <li>Berücksichtigt sie interessierte Parteien (4.2)?</li>
+                    <li>Unterstützt sie Ihre Unternehmensstrategie?</li>
+                    <li>Ist sie aktuell oder "verstaubt"?</li>
+                </ul>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 7: Änderungsplanung -->
+        <div class="module" id="module7">
+            <h2>7. Planung von Änderungen (6.3)</h2>
+            
+            <div class="highlight-box">
+                <h3>📝 Abschnitt 6.3 wird erweitert</h3>
+                <p>Die Anforderungen an die <strong>Planung von Änderungen</strong> werden um zusätzliche Unterpunkte ergänzt.</p>
+            </div>
+            
+            <h3>Neue Unterpunkte in 6.3:</h3>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #E2E8F0; margin: 1.5rem 0;">
+                <p style="margin-bottom: 1rem;"><strong>Wenn Änderungen am QMS geplant werden, muss die Organisation berücksichtigen:</strong></p>
+                <p>a) Zweck der Änderung und mögliche Konsequenzen</p>
+                <p>b) Integrität des QMS</p>
+                <p>c) Verfügbarkeit von Ressourcen</p>
+                <p>d) Zuweisung oder Neuzuweisung von Verantwortlichkeiten</p>
+                <p style="color: #805AD5;"><strong>e) [NEU] ...</strong></p>
+                <p style="color: #805AD5;"><strong>f) [NEU] ...</strong></p>
+                <p style="color: #805AD5;"><strong>g) [NEU] ...</strong></p>
+            </div>
+            
+            <div class="highlight-box warning">
+                <h4>⚠️ Hinweis</h4>
+                <p>Die genauen Formulierungen der neuen Unterpunkte e), f) und g) sind im DIS enthalten und urheberrechtlich geschützt. Sie betreffen erweiterte Planungsanforderungen für Änderungen.</p>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 8: Anhänge & Redaktion -->
+        <div class="module" id="module8">
+            <h2>8. Anhänge & Redaktionelle Änderungen</h2>
+            
+            <div class="highlight-box">
+                <h3>📚 Anhänge werden überarbeitet</h3>
+            </div>
+            
+            <h3>Änderungen an den Anhängen:</h3>
+            
+            <div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
+                <div style="background: #F0FFF4; padding: 1.25rem; border-radius: 8px; border-left: 4px solid #38A169;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #276749;">✓ Anhang A – Grundlegend überarbeitet</h4>
+                    <p style="margin: 0;">Der informative Anhang A wird komplett überarbeitet, um Struktur, Terminologie und Konzepte <strong>verständlicher zu erklären</strong>.</p>
+                </div>
+                
+                <div style="background: #FFF5F5; padding: 1.25rem; border-radius: 8px; border-left: 4px solid #E53E3E;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #C53030;">✗ Anhang B – Gestrichen</h4>
+                    <p style="margin: 0;">Der bisherige Anhang B (Verweis auf weitere ISO/TC 176-Normen) wird <strong>ersatzlos gestrichen</strong>.</p>
+                </div>
+            </div>
+            
+            <h3>Weitere redaktionelle Änderungen:</h3>
+            
+            <ul class="icon-list">
+                <li>Sprachliche Präzisierungen in vielen Abschnitten</li>
+                <li>Aktualisierte Anmerkungen (Notes) in 8.2, 8.3.x, 9.3.2, 10.2.1</li>
+                <li>Vereinheitlichte Begrifflichkeiten</li>
+                <li>Bessere Verständlichkeit insgesamt</li>
+            </ul>
+            
+            <div class="highlight-box success">
+                <h4>💡 Fazit</h4>
+                <p>Die meisten Änderungen sind <strong>Klarstellungen</strong>, keine grundlegenden Umstrukturierungen. Ziel ist bessere Lesbarkeit und Anwendbarkeit.</p>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 9: Zeitleiste -->
+        <div class="module" id="module9">
+            <h2>9. Zeitleiste & Übergangsfristen</h2>
+            
+            <div class="highlight-box">
+                <h3>📅 Der Weg zur ISO 9001:2026</h3>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">November 2025</div>
+                    <p>ISO/DIS 9001 – Abstimmung geschlossen (Stage 40.60)</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q2 2026 (ca. April)</div>
+                    <p>ISO/FDIS 9001 – Schlussabstimmung erwartet</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">September 2026</div>
+                    <p>Veröffentlichung ISO 9001:2026 (Edition 6) geplant</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026-2029</div>
+                    <p>Übergangsfrist (voraussichtlich 3 Jahre)</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box warning">
+                <h4>⚠️ Wichtig zur Übergangsfrist</h4>
+                <p>Nach Veröffentlichung der neuen Norm gilt typischerweise eine <strong>3-jährige Übergangsfrist</strong>. In dieser Zeit müssen alle zertifizierten Organisationen auf die neue Version umstellen.</p>
+                <p style="margin-top: 1rem;"><strong>Das bedeutet:</strong> Spätestens ca. 2029 müssen alle Zertifikate auf ISO 9001:2026 umgestellt sein.</p>
+            </div>
+            
+            <div class="highlight-box success">
+                <h4>💡 Empfehlung</h4>
+                <p>Warten Sie nicht bis zum letzten Moment! Beginnen Sie frühzeitig mit der Vorbereitung – die Änderungen sind überschaubar und gut planbar.</p>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Weiter →</button>
+            </div>
+        </div>
+
+        <!-- Modul 10: Praktische Umsetzung -->
+        <div class="module" id="module10">
+            <h2>10. Praktische Umsetzung – Ihre To-Do-Liste</h2>
+            
+            <div class="highlight-box">
+                <h3>✅ Quick Wins für die Umstellung</h3>
+                <p>Wenn Sie bereits ISO 9001:2015 gut umgesetzt haben, sind diese Punkte Ihre wichtigsten Aufgaben:</p>
+            </div>
+            
+            <div style="margin: 1.5rem 0;">
+                <div class="checklist-item">
+                    <div class="checklist-icon">1</div>
+                    <div>
+                        <strong>Klimawandel bewerten</strong>
+                        <p style="margin: 0.25rem 0 0 0; color: #718096; font-size: 0.95rem;">Kontext (4.1) und interessierte Parteien (4.2) um Klimaaspekt ergänzen/argumentieren</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">2</div>
+                    <div>
+                        <strong>Chancen systematisch behandeln</strong>
+                        <p style="margin: 0.25rem 0 0 0; color: #718096; font-size: 0.95rem;">Risiken/Chancen-Prozess schärfen, damit Chancen sichtbar und systematisch behandelt werden</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">3</div>
+                    <div>
+                        <strong>Qualitätspolitik prüfen</strong>
+                        <p style="margin: 0.25rem 0 0 0; color: #718096; font-size: 0.95rem;">Auf Kontext und Strategie abgleichen – ist sie noch aktuell?</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">4</div>
+                    <div>
+                        <strong>Qualitätskultur & Ethik verankern</strong>
+                        <p style="margin: 0.25rem 0 0 0; color: #718096; font-size: 0.95rem;">Nicht nur "Papier" – als Führungsnachweis: Kommunikation, Routinen, Schulung, Ziele</p>
+                    </div>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-icon">5</div>
+                    <div>
+                        <strong>Dokumentation anpassen</strong>
+                        <p style="margin: 0.25rem 0 0 0; color: #718096; font-size: 0.95rem;">Kapitelverweise aktualisieren (falls 1:1 zur Norm), Anhang B Verweise entfernen</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box success" style="text-align: center;">
+                <h3>🎓 Geschafft!</h3>
+                <p>Sie haben alle Lernmodule abgeschlossen. Jetzt folgt der <strong>Abschlusstest</strong> mit 10 Fragen.</p>
+                <p>Bestehen ab 70% (7 von 10 richtig)</p>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevModule()">← Zurück</button>
+                <button class="btn btn-primary" onclick="nextModule()">Zum Abschlusstest →</button>
+            </div>
+        </div>
+
+        <!-- Modul 11: Quiz -->
+        <div class="module" id="module11">
+            <h2>📝 Abschlusstest</h2>
+            <p>Beantworten Sie die folgenden 10 Fragen. Sie benötigen mindestens 7 richtige Antworten (70%) zum Bestehen.</p>
+            
+            <div class="quiz-question" data-correct="b">
+                <h3>Frage 1: Wann wird die ISO 9001:2026 voraussichtlich veröffentlicht?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">März 2026</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">September 2026</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">Januar 2027</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">Dezember 2025</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="c">
+                <h3>Frage 2: Wie heißt die neue Struktur, die die High Level Structure (HLS) ersetzt?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">Advanced Level Structure (ALS)</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">Unified Structure (US)</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">Harmonized Structure (HS)</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">Integrated Structure (IS)</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="a">
+                <h3>Frage 3: In welchen Abschnitten wird Klimawandel explizit berücksichtigt?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">4.1 Kontext und 4.2 Interessierte Parteien</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">6.1 Risiken und 6.2 Qualitätsziele</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">7.1 Ressourcen und 7.2 Kompetenz</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">9.1 Überwachung und 10.1 Verbesserung</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="d">
+                <h3>Frage 4: Was passiert mit Abschnitt 6.1 "Risiken und Chancen"?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">Er wird komplett gestrichen</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">Er bleibt unverändert</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">Er wird mit 6.2 zusammengelegt</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">Er wird in getrennte Unterabschnitte für Risiken und Chancen aufgeteilt</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="b">
+                <h3>Frage 5: Welche neuen expliziten Anforderungen gibt es an die Führung (5.1.1)?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">Digitalisierung und Automatisierung fördern</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">Qualitätskultur und ethisches Verhalten fördern</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">Internationale Expansion unterstützen</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">Kostensenkung priorisieren</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="a">
+                <h3>Frage 6: Was passiert mit Anhang B der ISO 9001?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">Er wird ersatzlos gestrichen</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">Er wird erweitert</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">Er wird zu Anhang C verschoben</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">Er bleibt unverändert</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="c">
+                <h3>Frage 7: Wie lange ist die voraussichtliche Übergangsfrist nach Veröffentlichung?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">1 Jahr</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">2 Jahre</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">3 Jahre</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">5 Jahre</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="b">
+                <h3>Frage 8: Was soll bei der Qualitätspolitik (5.2.1) stärker berücksichtigt werden?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">Wettbewerbsanalyse und Marktposition</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">Kontext der Organisation und strategische Ausrichtung</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">Finanzielle Kennzahlen</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">Technologische Entwicklungen</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="d">
+                <h3>Frage 9: Was ist der Hauptcharakter der Revision 2026?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">Komplette Neustrukturierung der Norm</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">Streichung vieler Anforderungen</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">Fokus nur auf Digitalisierung</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">Klarstellungen und Präzisierungen statt "Big Bang"</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="a">
+                <h3>Frage 10: In welchem Abschnitt wird "Bewusstsein" um Qualitätskultur und Ethik erweitert?</h3>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="a">7.3 Bewusstsein</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="b">7.1 Ressourcen</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="c">7.4 Kommunikation</div>
+                    <div class="quiz-option" onclick="selectOption(this)" data-value="d">7.5 Dokumentierte Information</div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="submitQuiz()" style="width: 100%; padding: 1rem; font-size: 1.1rem; margin-top: 1rem;">
+                ✓ Test auswerten
+            </button>
+        </div>
+
+        <!-- Modul 12: Ergebnis -->
+        <div class="module" id="module12">
+            <div class="result-container">
+                <div id="resultIcon" style="font-size: 5rem;">🎓</div>
+                <h2 id="resultTitle">Ergebnis</h2>
+                <div id="resultScore" class="result-score">0/10</div>
+                <p id="resultText"></p>
+                
+                <div id="resultActions" style="margin-top: 2rem;">
+                </div>
+            </div>
+            
+            <div id="quizReview" style="margin-top: 2rem;">
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; color: #718096; border-top: 1px solid #E2E8F0; margin-top: 2rem;">
+        <p>© 2025 QM-Dienstleistungen | Holger Grosser | <a href="https://qm-guru.de" style="color: var(--primary);">qm-guru.de</a></p>
+        <p style="font-size: 0.85rem;">Erstellt: QM Elfe · Freigabe: QM Guru</p>
+    </footer>
+
+    <script>
+        let currentModule = 0;
+        let userData = {};
+        let quizAnswers = {};
+        const totalModules = 12;
+        const totalLearningModules = 10;
+
+        function updateProgress() {
+            const progress = currentModule === 0 ? 0 : (currentModule / totalModules) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            if (currentModule === 0) {
+                document.getElementById('progressText').textContent = 'Registrierung';
+            } else if (currentModule <= totalLearningModules) {
+                document.getElementById('progressText').textContent = `Modul ${currentModule} von ${totalLearningModules}`;
+            } else if (currentModule === 11) {
+                document.getElementById('progressText').textContent = 'Abschlusstest';
+            } else {
+                document.getElementById('progressText').textContent = 'Ergebnis';
+            }
+        }
+
+        function showModule(index) {
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+            document.getElementById('module' + index).classList.add('active');
+            currentModule = index;
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function startCourse() {
+            const vorname = document.getElementById('vorname').value.trim();
+            const nachname = document.getElementById('nachname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const firma = document.getElementById('firma').value.trim();
+
+            if (!vorname || !nachname || !email) {
+                alert('Bitte füllen Sie alle Pflichtfelder aus.');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                alert('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+                return;
+            }
+
+            userData = {
+                name: vorname + ' ' + nachname,
+                email: email,
+                firma: firma
+            };
+
+            showModule(1);
+        }
+
+        function nextModule() {
+            if (currentModule < totalModules) {
+                showModule(currentModule + 1);
+            }
+        }
+
+        function prevModule() {
+            if (currentModule > 0) {
+                showModule(currentModule - 1);
+            }
+        }
+
+        function selectOption(element) {
+            const question = element.closest('.quiz-question');
+            question.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            const questionIndex = Array.from(document.querySelectorAll('.quiz-question')).indexOf(question);
+            quizAnswers[questionIndex] = element.dataset.value;
+        }
+
+        function submitQuiz() {
+            const questions = document.querySelectorAll('.quiz-question');
+            let score = 0;
+            let allAnswered = true;
+
+            questions.forEach((q, index) => {
+                if (!quizAnswers[index]) {
+                    allAnswered = false;
+                }
+            });
+
+            if (!allAnswered) {
+                alert('Bitte beantworten Sie alle Fragen.');
+                return;
+            }
+
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct;
+                const selected = quizAnswers[index];
+                
+                q.querySelectorAll('.quiz-option').forEach(opt => {
+                    if (opt.dataset.value === correct) {
+                        opt.classList.add('correct');
+                    } else if (opt.dataset.value === selected && selected !== correct) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
+                if (selected === correct) {
+                    score++;
+                }
+            });
+
+            showResult(score, questions.length);
+        }
+
+        function showResult(score, total) {
+            const passed = score >= 7;
+            const percentage = Math.round((score / total) * 100);
+
+            document.getElementById('resultIcon').textContent = passed ? '🎓' : '😔';
+            document.getElementById('resultTitle').textContent = passed ? 'Herzlichen Glückwunsch!' : 'Leider nicht bestanden';
+            document.getElementById('resultScore').textContent = score + '/' + total;
+            document.getElementById('resultScore').className = 'result-score ' + (passed ? 'result-passed' : 'result-failed');
+            document.getElementById('resultText').textContent = passed 
+                ? `Sie haben ${percentage}% erreicht und die Schulung erfolgreich abgeschlossen!`
+                : `Sie haben ${percentage}% erreicht. Zum Bestehen sind 70% (7 richtige Antworten) erforderlich.`;
+
+            let actionsHTML = '';
+            if (passed) {
+                actionsHTML = `
+                    <button class="btn btn-primary" onclick="downloadCertificate(${score}, ${total})" style="padding: 1rem 2rem;">
+                        📄 Zertifikat anfordern
+                    </button>
+                    <p style="margin-top: 1rem; color: #718096;">Das Zertifikat wird per E-Mail an ${userData.email} gesendet.</p>
+                `;
+            } else {
+                actionsHTML = `
+                    <button class="btn btn-primary" onclick="retryQuiz()" style="padding: 1rem 2rem; margin-right: 1rem;">
+                        🔄 Test wiederholen
+                    </button>
+                    <button class="btn btn-secondary" onclick="showModule(1)" style="padding: 1rem 2rem;">
+                        📚 Schulung wiederholen
+                    </button>
+                `;
+            }
+            document.getElementById('resultActions').innerHTML = actionsHTML;
+
+            showModule(12);
+
+            if (passed) {
+                sendCertificateRequest(score, total, percentage);
+            }
+        }
+
+        function retryQuiz() {
+            quizAnswers = {};
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+            showModule(11);
+        }
+
+        // Zertifikat per Google Apps Script versenden
+        const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzsAy4jXWwK9KxQATPDcsYDMV5YM1dlL06yrz1SS86D3GfhY-UsdbNdEwGfnzCZghd3/exec';
+
+        function sendCertificateRequest(score, total, percentage) {
+            const data = {
+                name: userData.name,
+                email: userData.email,
+                firma: userData.firma || '',
+                score: score,
+                totalQuestions: total,
+                percentage: percentage,
+                answers: Object.values(quizAnswers),
+                timestamp: new Date().toISOString()
+            };
+
+            if (WEBAPP_URL === 'WEBAPP_URL_HIER_EINTRAGEN') {
+                console.log('WebApp URL nicht konfiguriert. Zertifikat-Daten:', data);
+                return;
+            }
+
+            fetch(WEBAPP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                console.log('Zertifikat-Anfrage gesendet');
+            })
+            .catch(error => {
+                console.error('Fehler beim Senden:', error);
+            });
+        }
+
+        function downloadCertificate(score, total) {
+            alert(`Ihr Zertifikat wird an ${userData.email} gesendet.\n\nName: ${userData.name}\nErgebnis: ${score}/${total} (${Math.round(score/total*100)}%)`);
+        }
+
+        // Initial
+        updateProgress();
+    </script>
+</body>
+</html>
